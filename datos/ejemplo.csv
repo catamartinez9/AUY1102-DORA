@@ -1,0 +1,5 @@
+run_id,sha,commit_at,deployed_at,failed,recovery_of,run_url
+101,aaaaaaaa,2026-11-19T10:00:00Z,2026-11-19T10:04:00Z,0,,https://github.com/ejemplo/dora/actions/runs/101
+102,bbbbbbbb,2026-11-19T10:10:00Z,2026-11-19T10:16:00Z,0,,https://github.com/ejemplo/dora/actions/runs/102
+103,cccccccc,2026-11-19T10:20:00Z,2026-11-19T10:24:00Z,1,,https://github.com/ejemplo/dora/actions/runs/103
+104,dddddddd,2026-11-19T10:30:00Z,2026-11-19T10:34:00Z,0,103,https://github.com/ejemplo/dora/actions/runs/104

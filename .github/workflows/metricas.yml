@@ -1,0 +1,29 @@
+name: Informe DORA
+on:
+  workflow_dispatch:
+    inputs:
+      inicio:
+        description: 'Inicio UTC inclusivo, ejemplo 2026-11-19T00:00:00Z'
+        required: true
+        type: string
+      fin:
+        description: 'Fin UTC exclusivo, ejemplo 2026-11-20T00:00:00Z'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  informe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Calcular con el registro del grupo
+        env:
+          INICIO: ${{ inputs.inicio }}
+          FIN: ${{ inputs.fin }}
+        run: python scripts/metricas.py --inicio "$INICIO" --fin "$FIN" --titulo "Datos reales del equipo"
+      - name: Analizar caso ficticio sin modificar el sitio
+        run: python scripts/metricas.py --archivo datos/ejemplo.csv --inicio 2026-11-19T00:00:00Z --fin 2026-11-20T00:00:00Z --titulo "Caso ficticio de analisis"

@@ -1,0 +1,51 @@
+name: DORA Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy.yml'
+      - 'scripts/record_deployment.py'
+permissions:
+  contents: read
+concurrency:
+  group: dora-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Validar estructura
+        run: |
+          python -c "from pathlib import Path; s=Path('site/index.html').read_text(); assert '<html' in s, 'Falta apertura html'"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Publicar
+        id: publicar
+        uses: actions/deploy-pages@v4
+      - name: Registrar publicacion
+        run: python scripts/record_deployment.py
