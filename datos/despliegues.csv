@@ -1,1 +1,3 @@
 run_id,sha,commit_at,deployed_at,failed,recovery_of,run_url
+45791369868,0c3c95840fe93bc902f658ba1f435c1256ae2d6e,2026-11-26T06:22:20-03:00,2026-11-26T09:22:55+00:00,0,,https://github.com/catamartinez9/AUY1102-DORA/actions/runs/45791369868
+45792204767,439ef5fe38de20791a8a18a36c793432e51be0eb,2026-11-26T06:28:02-03:00,2026-11-26T09:28:23+00:00,0,,https://github.com/catamartinez9/AUY1102-DORA/actions/runs/45792204767
